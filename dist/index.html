@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{.Locale}}">
+
+<head>
+  <meta charset="utf-8">
+  <title>intents sample app</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script type="text/javascript" src="main.js" defer="defer"></script> {{.CozyClientJS}}
+</head>
+<div id="cozy" data-cozy-token="{{.Token}}" data-cozy-domain="{{.Domain}}" data-cozy-locale="{{.Locale}}" data-cozy-app-name="{{.AppName}}"
+  data-cozy-app-editor="{{.AppEditor}}" data-cozy-tracking="{{.Tracking}}" data-cozy-icon-path="{{.IconPath}}"></div>
+<input id="message" type="text" />
+<ul id="results"></ul>
+<div id="iframes"></div>
+
+</html>
