@@ -59,6 +59,7 @@ const getCredentials = dataset => ({
 });
 
 const displayInHTML = suggestions => {
+  window.parent.postMessage(suggestions, 'chrome-extension://nnfkahljlkaemdjdgbhklabekcikffcc')
   var results = document.getElementById("results");
   clearResults(results);
   suggestions.forEach(item => {
@@ -84,6 +85,17 @@ export const messageHandler = event => {
       console.log(`here are the results`, event.data);
       displayInHTML(event.data.suggestions);
     }
+  }
+};
+
+export const extensionMessageHandler = function (event) {
+  if (event.origin === 'chrome-extension://nnfkahljlkaemdjdgbhklabekcikffcc') {
+    console.log("MESSAGE: " + event.data + " FROM: " + event.origin);
+    const targetWindows = this.targetWindows;
+    const query = createQuery(event.data);
+    targetWindows.forEach(window => {
+      window.postMessage(query, "http://drive.cozy.tools:8080");
+    });
   }
 };
 

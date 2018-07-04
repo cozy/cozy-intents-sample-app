@@ -4,7 +4,8 @@ import {
   value,
   createQuery,
   fetchRawIntents,
-  createTargetWindow
+  createTargetWindow,
+  extensionMessageHandler
 } from "./helpers";
 
 const app = {
@@ -20,10 +21,12 @@ const app = {
       false
     );
     window.addEventListener("message", messageHandler);
+    window.addEventListener("message", extensionMessageHandler.bind(this));
     document
       .getElementById("message")
       .addEventListener("input", this.onInput.bind(this));
   },
+
 
   onInput: function(event) {
     const targetWindows = this.targetWindows;
