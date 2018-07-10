@@ -76,9 +76,9 @@ const clearResults = results => {
 };
 
 export const messageHandler = event => {
-  if (event.origin === "http://intents-dev.cozy.tools:8080") {
+  if (event.origin === "https://secsiproject-qwanttest.mycozy.cloud/") {
     console.log("internal message received");
-  } else if (event.origin === "http://drive.cozy.tools:8080") {
+  } else if (event.origin === "https://secsiproject-drive.mycozy.cloud") {
     if (event.data.type.includes(":ready")) {
       console.log("intents is ready");
     } else if (event.data.type.includes(":data")) {
@@ -94,7 +94,7 @@ export const extensionMessageHandler = function (event) {
     const targetWindows = this.targetWindows;
     const query = createQuery(event.data);
     targetWindows.forEach(window => {
-      window.postMessage(query, "http://drive.cozy.tools:8080");
+      window.postMessage(query, "https://secsiproject-drive.mycozy.cloud");
     });
   }
 };
