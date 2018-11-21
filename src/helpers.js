@@ -102,7 +102,7 @@ export const createTargetWindow = (url, slug) => {
   return iframe.contentWindow;
 };
 
-export const createQuery = query => ({ query });
+export const createQuery = query => ({ query, id: new Date().getTime() });
 
 export const fetchRawIntents = dataset => {
   const data = getCredentials(dataset);
