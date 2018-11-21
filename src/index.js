@@ -30,7 +30,7 @@ const app = {
     const val = value(event);
     const query = createQuery(val);
     targetWindows.forEach(window => {
-      window.postMessage(query, "http://drive.cozy.tools:8080");
+      window.postMessage(query, "https://secsiproject-drive.mycozy.cloud");
     });
   },
 
