@@ -1,3 +1,6 @@
+export const webext_id = "manlhohdnggdocclckddhnojeiipgjbc";
+export const instance_id = "cortest";
+
 const buildErrorMessage = error =>
   `There has been a problem with your fetch operation: ${error.message}`;
 
@@ -59,7 +62,8 @@ const getCredentials = dataset => ({
 });
 
 const displayInHTML = suggestions => {
-  window.parent.postMessage(suggestions, 'chrome-extension://nnfkahljlkaemdjdgbhklabekcikffcc')
+  console.log("RESULTS TO WEBEXT:", suggestions);
+  window.parent.postMessage(suggestions, 'chrome-extension://' + webext_id)
   var results = document.getElementById("results");
   clearResults(results);
   suggestions.forEach(item => {
@@ -76,9 +80,9 @@ const clearResults = results => {
 };
 
 export const messageHandler = event => {
-  if (event.origin === "https://secsiproject-qwanttest.mycozy.cloud/") {
+  if (event.origin === ("https://"+ instance_id + "-qwanttest.mycozy.cloud/")) {
     console.log("internal message received");
-  } else if (event.origin === "https://secsiproject-drive.mycozy.cloud") {
+  } else if (event.origin === ("https://"+ instance_id + "-drive.mycozy.cloud")) {
     if (event.data.type.includes(":ready")) {
       console.log("intents is ready");
     } else if (event.data.type.includes(":data")) {
@@ -89,12 +93,12 @@ export const messageHandler = event => {
 };
 
 export const extensionMessageHandler = function (event) {
-  if (event.origin === 'chrome-extension://nnfkahljlkaemdjdgbhklabekcikffcc') {
-    console.log("MESSAGE: " + event.data + " FROM: " + event.origin);
+  if (event.origin === ('chrome-extension://' + webext_id)) {
+    console.log("WEBEXT MESSAGE: " + event.data + " FROM: " + event.origin);
     const targetWindows = this.targetWindows;
     const query = createQuery(event.data);
     targetWindows.forEach(window => {
-      window.postMessage(query, "https://secsiproject-drive.mycozy.cloud");
+      window.postMessage(query, ("https://"+ instance_id + "-drive.mycozy.cloud"));
     });
   }
 };
@@ -122,3 +126,4 @@ export const fetchRawIntents = dataset => {
 };
 
 export const value = event => event.target.value;
+
