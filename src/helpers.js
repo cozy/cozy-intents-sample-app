@@ -1,4 +1,7 @@
-export const webext_id = "manlhohdnggdocclckddhnojeiipgjbc";
+export const webext_ids = [
+ "chrome-extension://manlhohdnggdocclckddhnojeiipgjbc",
+ "chrome-extension://ffcmikbhfbjcioofacoggoppaccmeiko"
+];
 export const instance_id = "cortest";
 
 const buildErrorMessage = error =>
@@ -63,7 +66,9 @@ const getCredentials = dataset => ({
 
 const displayInHTML = suggestions => {
   console.log("RESULTS TO WEBEXT:", suggestions);
-  window.parent.postMessage(suggestions, 'chrome-extension://' + webext_id)
+  webext_ids.forEach(function(webext_id) { 
+    window.parent.postMessage(suggestions, webext_id);
+  });
   var results = document.getElementById("results");
   clearResults(results);
   suggestions.forEach(item => {
@@ -93,7 +98,7 @@ export const messageHandler = event => {
 };
 
 export const extensionMessageHandler = function (event) {
-  if (event.origin === ('chrome-extension://' + webext_id)) {
+  if (webext_ids.includes(event.origin)) {
     console.log("WEBEXT MESSAGE: " + event.data + " FROM: " + event.origin);
     const targetWindows = this.targetWindows;
     const query = createQuery(event.data);
