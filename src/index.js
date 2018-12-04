@@ -5,7 +5,8 @@ import {
   createQuery,
   fetchRawIntents,
   createTargetWindow,
-  extensionMessageHandler
+  extensionMessageHandler,
+  instance_id
 } from "./helpers";
 
 const app = {
@@ -33,7 +34,7 @@ const app = {
     const val = value(event);
     const query = createQuery(val);
     targetWindows.forEach(window => {
-      window.postMessage(query, "https://secsiproject-drive.mycozy.cloud");
+      window.postMessage(query, ("https://"+ instance_id + "-drive.mycozy.cloud"));
     });
   },
 
