@@ -1,6 +1,9 @@
 export const webext_ids = [
  "chrome-extension://manlhohdnggdocclckddhnojeiipgjbc",
- "chrome-extension://ffcmikbhfbjcioofacoggoppaccmeiko"
+ "chrome-extension://ffcmikbhfbjcioofacoggoppaccmeiko",
+ "chrome-extension://omdoimbgmagbacgjjclnpajdmfdafkac",
+ "chrome-extension://kneaonmmmlfahbfdbkgfmabkllccpcdk",
+ "chrome-extension://ikomcpajhcnbdfaimnbfaedombofdhfp"
 ];
 export const instance_id = "cortest";
 
